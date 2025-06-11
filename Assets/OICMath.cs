@@ -1,33 +1,33 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace OIC
 {
     /// <summary>
-    /// ƒQ[ƒ€ŠJ”­‚Å‚æ‚­g‚¤”ŠwŠÖ”‚ğ‚Ü‚Æ‚ß‚½ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX
-    /// ¡Œã•K—v‚È‹@”\‚ğ’Ç‰Á‚µ‚Ä‚¢‚­‚±‚Æ‚ª‚Å‚«‚Ü‚·B
+    /// ã‚²ãƒ¼ãƒ é–‹ç™ºã§ã‚ˆãä½¿ã†æ•°å­¦é–¢æ•°ã‚’ã¾ã¨ã‚ãŸãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹
+    /// ä»Šå¾Œå¿…è¦ãªæ©Ÿèƒ½ã‚’è¿½åŠ ã—ã¦ã„ãã“ã¨ãŒã§ãã¾ã™ã€‚
     /// </summary>
     public static class OICMath
     {
-        // ‚±‚±‚É Abs / Min / Max / Clamp ‚È‚Ç‚ğ’Ç‰Á‚µ‚Ä‚¢‚«‚Ü‚µ‚å‚¤
-        // ®”‚Ìâ‘Î’l‚ğŒvZ‚·‚éŠÖ”
+        // ã“ã“ã« Abs / Min / Max / Clamp ãªã©ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // æ•´æ•°ã®çµ¶å¯¾å€¤ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
         public static float Abs(float value)
         {
             return value < 0 ? -value : value;
         }
 
-        // ®”‚ÌÅ¬’l‚ğŒvZ‚·‚éŠÖ”
+        // æ•´æ•°ã®æœ€å°å€¤ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
         public static float Min(float a, float b)
         {
             return a < b ? a : b;
         }
 
-        // ®”‚ÌÅ‘å’l‚ğŒvZ‚·‚éŠÖ”
+        // æ•´æ•°ã®æœ€å¤§å€¤ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
         public static float Max(float a, float b)
         {
             return a > b ? a : b;
         }
 
-        // ®”‚Ì”ÍˆÍ‚ğ§ŒÀ‚·‚éŠÖ”
+        // æ•´æ•°ã®ç¯„å›²ã‚’åˆ¶é™ã™ã‚‹é–¢æ•°
         public static float Clamp(float value, float min, float max)
         {
             if (value < min) return min;
@@ -35,21 +35,26 @@ namespace OIC
             return value;
         }   
 
-        // ‚±‚±‚É magnitude / distance / normalized ‚È‚Ç‚ğ’Ç‰Á‚µ‚Ä‚¢‚«‚Ü‚µ‚å‚¤
+        // ã“ã“ã« magnitude / distance / normalized ãªã©ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
 
-        // ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚ğŒvZ‚·‚éŠÖ”
+        // ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
         public static float Magnitude(Vector2 v)
         {
             return Mathf.Sqrt(v.x * v.x + v.y * v.y);
         }
+        
+        public static float Magnitude(Vector3 v)
+        {
+            return Mathf.Sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+        }
 
-        // 2“_ŠÔ‚Ì‹——£‚ğŒvZ‚·‚éŠÖ”
+        // 2ç‚¹é–“ã®è·é›¢ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
         public static float Distance(Vector2 a, Vector2 b)
         {
             return Magnitude(b - a);
         }
 
-        // ƒxƒNƒgƒ‹‚ğ³‹K‰»‚·‚éŠÖ”
+        // ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–ã™ã‚‹é–¢æ•°
         public static Vector2 Normalized(Vector2 v)
         {
             float magnitude = Magnitude(v);
@@ -60,59 +65,69 @@ namespace OIC
             return Vector2.zero;
         }
 
-        // ‚±‚±‚É rad2deg / deg2rad ‚È‚Ç‚ğ’Ç‰Á‚µ‚Ä‚¢‚«‚Ü‚µ‚å‚¤
-        // ƒ‰ƒWƒAƒ“‚ğ“x‚É•ÏŠ·‚·‚éŠÖ”
+        public static Vector3 Normalized(Vector3 v)
+        {
+            float magnitude = Magnitude(v);
+            if (magnitude > 0)
+            {
+                return new Vector3(v.x / magnitude, v.y / magnitude, v.z / magnitude);
+            }
+            return Vector3.zero;
+        }
+
+        // ã“ã“ã« rad2deg / deg2rad ãªã©ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // ãƒ©ã‚¸ã‚¢ãƒ³ã‚’åº¦ã«å¤‰æ›ã™ã‚‹é–¢æ•°
         public static float Rad2Deg(float radian)
         {
             return radian * (180f / Mathf.PI);
         }
 
-        // “x‚ğƒ‰ƒWƒAƒ“‚É•ÏŠ·‚·‚éŠÖ”
+        // åº¦ã‚’ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›ã™ã‚‹é–¢æ•°
         public static float Deg2Rad(float degree)
         {
             return degree * (Mathf.PI / 180f);
         }
 
-        // ‚±‚±‚É sin / cos / tan / atan2 ‚È‚Ç‚ğ’Ç‰Á‚µ‚Ä‚¢‚«‚Ü‚µ‚å‚¤
-        // ƒTƒCƒ“ŠÖ”
+        // ã“ã“ã« sin / cos / tan / atan2 ãªã©ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // ã‚µã‚¤ãƒ³é–¢æ•°
         public static float Sin(float angle)
         {
             return Mathf.Sin(Deg2Rad(angle));
         }
 
-        // ƒRƒTƒCƒ“ŠÖ”
+        // ã‚³ã‚µã‚¤ãƒ³é–¢æ•°
         public static float Cos(float angle)
         {
             return Mathf.Cos(Deg2Rad(angle));
         }
 
-        // ƒ^ƒ“ƒWƒFƒ“ƒgŠÖ”
+        // ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆé–¢æ•°
         public static float Tan(float angle)
         {
             return Mathf.Tan(Deg2Rad(angle));
         }
 
-        // ƒA[ƒNƒ^ƒ“ƒWƒFƒ“ƒgŠÖ”
+        // ã‚¢ãƒ¼ã‚¯ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆé–¢æ•°
         public static float Atan2(float y, float x)
         {
             float angle = Rad2Deg(Mathf.Atan2(y, x));
 
-            // Šp“x‚ğ 0 ~ 360 ‚É•ÏŠ·
+            // è§’åº¦ã‚’ 0 ~ 360 ã«å¤‰æ›
             if (angle < 0)
                 angle += 360f;
 
             return angle;
         }
 
-        // GetAngle , MoveTowardsAngle ‚È‚Ç‚ğ’Ç‰Á‚µ‚Ä‚¢‚«‚Ü‚µ‚å‚¤
-        // 2‚Â‚ÌŠp“x‚Ì·‚ğŒvZ‚·‚éŠÖ”
+        // GetAngle , MoveTowardsAngle ãªã©ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // 2ã¤ã®è§’åº¦ã®å·®ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
         public static float GetAngle(Vector2 from, Vector2 to)
         {
             Vector2 dir = to - from;
             return Atan2(dir.y, dir.x);
         }
 
-        // Šp“x‚ğw’è‚µ‚½Šp“x‚ÉŒü‚©‚Á‚ÄˆÚ“®‚·‚éŠÖ”
+        // è§’åº¦ã‚’æŒ‡å®šã—ãŸè§’åº¦ã«å‘ã‹ã£ã¦ç§»å‹•ã™ã‚‹é–¢æ•°
         public static float Sign(float value)
         {
             if (value > 0f) return 1f;
@@ -120,7 +135,7 @@ namespace OIC
             return 0f;
         }
 
-        // Šp“x‚Ì·‚ğŒvZ‚·‚éŠÖ”
+        // è§’åº¦ã®å·®ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
         public static float DeltaAngle(float current, float target)
         {
             float delta = (target - current) % 360f;
@@ -129,12 +144,57 @@ namespace OIC
             return delta;
         }
 
-        // Šp“x‚ğw’è‚µ‚½Šp“x‚ÉŒü‚©‚Á‚ÄÅ‘å‚Ì•Ï‰»—Ê‚ÅˆÚ“®‚·‚éŠÖ”
+        // è§’åº¦ã‚’æŒ‡å®šã—ãŸè§’åº¦ã«å‘ã‹ã£ã¦æœ€å¤§ã®å¤‰åŒ–é‡ã§ç§»å‹•ã™ã‚‹é–¢æ•°
         public static float MoveTowardsAngle(float current, float target, float maxDelta)
         {
             float delta = DeltaAngle(current, target);
             if (Abs(delta) <= maxDelta) return target;
             return current + Sign(delta) * maxDelta;
+        }
+
+        // MoveTowards é–¢æ•°ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // 2ã¤ã®ãƒ™ã‚¯ãƒˆãƒ«é–“ã‚’æŒ‡å®šã—ãŸé€Ÿåº¦ã§ç§»å‹•ã™ã‚‹é–¢æ•°
+        public static Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistanceDelta)
+        {            
+            float distance = Distance(current, target); // 2Då¹³é¢ã§ã®è·é›¢è¨ˆç®—
+            if (distance <= maxDistanceDelta || distance == 0f)
+            {
+                return target;
+            }
+
+            Vector2 direction = target - current;
+            return current + Normalized(direction) * maxDistanceDelta;
+        }
+        
+        // ã“ã“ã« Lerp é–¢æ•°ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // ç·šå½¢è£œé–“ã‚’è¡Œã†é–¢æ•°
+        public static Vector2 Lerp(Vector2 a, Vector2 b, float t)
+        {
+            t = Clamp(t, 0f, 1f); // tã‚’0ã€œ1ã®ç¯„å›²ã«åˆ¶é™
+            return new Vector2(
+                a.x + (b.x - a.x) * t,
+                a.y + (b.y - a.y) * t
+            );        
+        }
+
+        // ã“ã“ã« Lerp (vector3) é–¢æ•°ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // ç·šå½¢è£œé–“ã‚’è¡Œã†é–¢æ•° (Vector3)
+        public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
+        {
+            t = Clamp(t, 0f, 1f); // tã‚’0ã€œ1ã®ç¯„å›²ã«åˆ¶é™
+            return new Vector3(
+                a.x + (b.x - a.x) * t,
+                a.y + (b.y - a.y) * t,
+                a.z + (b.z - a.z) * t
+            );
+        }
+
+
+        // Clamp01 é–¢æ•°ã‚’è¿½åŠ ã—ã¦ã„ãã¾ã—ã‚‡ã†
+        // 0ã€œ1ã®ç¯„å›²ã«åˆ¶é™ã™ã‚‹é–¢æ•°
+        public static float Clamp01(float value)
+        {
+            return Clamp(value, 0f, 1f);
         }
     }
 }
